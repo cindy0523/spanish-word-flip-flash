@@ -4,6 +4,7 @@ async function gotoHomeWithRetry(page: Page) {
   for (let i = 0; i < 3; i++) {
     await page.goto('/');
     const counter = page.getByTestId('counter');
+    
     try {
       await counter.waitFor({ state: 'visible', timeout: 2000 });
       return;
@@ -31,10 +32,10 @@ test('flip the card and iterate next until wrapping to 1/15', async ({ page }) =
     const wasFlippedBefore = (classBefore ?? '').includes('rotate-y-180');
 
     await card.click({ force: true });
-    await page.waitForTimeout(600);
 
     const classAfter = await transformInner.getAttribute('class');
     const isFlippedAfter = (classAfter ?? '').includes('rotate-y-180');
+
     expect(isFlippedAfter).not.toBe(wasFlippedBefore);
 
     if (index < 15) {
