@@ -25,9 +25,14 @@ test('Random Card jumps to a non-sequential card (not 2/15 from 1/15)', async ({
 
   // Click a few times to ensure we land on non-sequential indices
   let sawNonSequential = false;
+
   for (let i = 0; i < 3; i++) {
     await randomButton.click();
-    const text = await counter.textContent();
+
+    // ✅ đợi counter thay đổi khỏi "1 / 15"
+    await expect(counter).not.toHaveText('1 / 15');
+    const text = await counter.innerText();
+
     // Expect not '2 / 15' when starting from '1 / 15'
     if (text && !/^\s*2\s*\/\s*15\s*$/.test(text)) {
       sawNonSequential = true;
@@ -37,5 +42,3 @@ test('Random Card jumps to a non-sequential card (not 2/15 from 1/15)', async ({
 
   expect(sawNonSequential).toBeTruthy();
 });
-
-
