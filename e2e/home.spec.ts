@@ -10,6 +10,6 @@ test('homepage loads and shows title', async ({ page }) => {
   const counter = page.getByTestId('counter');
   const nextBtn = page.getByTestId('next-btn');
 
-  // ✅ wait UI ready (Playwright style)
-  await expect(counter.or(nextBtn)).toBeVisible();
+  await expect(counter).toBeVisible();
+  await expect(nextBtn).toBeVisible();
 });
