@@ -44,7 +44,7 @@ jobs:
       - name: Install deps
         run: npm ci
       - name: Run Vitest
-        run: npx vitest run --reporter=verbose 
+        run: npx vitest run --reporter=verbose
         
   test_integration: 
     name: Integration Tests (Playwright)
